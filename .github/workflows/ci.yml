@@ -1,0 +1,38 @@
+name: CI Pipeline
+
+# 🔹 EVENT: trigger when code is pushed to main branch
+on:
+  push:
+    branches:
+      - main
+
+# 🔹 JOBS
+jobs:
+  build-and-test:
+
+    # Runs on GitHub virtual machine
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 🔹 STEP 1: Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 🔹 STEP 2: Setup Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 🔹 STEP 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # 🔹 STEP 4: Run tests
+      - name: Run Tests
+        run: npm test
+
+      # 🔹 STEP 5: Build step (optional)
+      - name: Build Application
+        run: echo "Build step (add your build command here)"
